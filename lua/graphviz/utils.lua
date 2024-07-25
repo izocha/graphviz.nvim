@@ -46,11 +46,12 @@ end
 M.have_file = function(file)
 	if vim.fn.filereadable(file) == 1 then
 		M.notification("Exportation succeed!")
+		return true
 	else
-		M.notification("Something goes wrong!", 4)
+		-- M.notification("Something goes wrong!", 4)
+		return false
 	end
-
-	return true
+	-- return true
 end
 
 return M
