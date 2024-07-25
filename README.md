@@ -45,7 +45,7 @@ This command only convert the actual file to preferred format.
 - `GraphPreview` don't take arguments, but you can change the format in setup
 
 ```vim
-GraphPreview
+:GraphPreview
 ```
 
 `GrapPreview` exports too, but it's a command that works similar but is automatic. This command exports on save!. So you don't need to run the command `GraphExport` every time you want to see results.
