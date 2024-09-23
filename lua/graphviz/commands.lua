@@ -2,7 +2,7 @@ local utils = require("graphviz.utils")
 
 local M = {}
 
-M.graph_preview = function(format)
+function M.graph_preview (format)
 	local buf_name, buf_path = utils.get_file()
 	local format_arg = "-T" .. format
 	local output = buf_name .. "." .. format
@@ -18,7 +18,7 @@ M.graph_preview = function(format)
 	end
 end
 
-M.graph_export = function(format)
+function M.graph_export (format)
 	local buf_name, buf_path = utils.get_file()
 	local format_arg = "-T" .. format
 	local output = buf_name .. "." .. format
@@ -29,7 +29,7 @@ M.graph_export = function(format)
 	end, 2500) then
 		vim.ui.open(output)
 	else
-		M.notification("Something goes wrong!", 4)
+		utils.notification("Something goes wrong!", vim.log.levels.ERROR)
 	end
 	-- utils.have_file(output)
 	--open file if it's possible

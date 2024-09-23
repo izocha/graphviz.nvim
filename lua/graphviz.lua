@@ -9,12 +9,12 @@ local M = {}
 
 M.config = config
 
-M.setup = function(args)
+function M.setup (args)
 	M.config = vim.tbl_deep_extend("force", M.config, args or {})
 	M.user_commands()
 end
 
-M.user_commands = function()
+function M.user_commands ()
 	local buf_user_command = vim.api.nvim_buf_create_user_command
 	-- Create commands ONLY for dot files
 	vim.api.nvim_create_autocmd("FileType", {
