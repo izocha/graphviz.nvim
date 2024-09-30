@@ -8,7 +8,13 @@ function M.on_save(command)
 		group = M.group,
 		pattern = { "*.dot", "*.gv" },
 		callback = function()
-			M.export(command)
+			vim.system(command, { stdin = true }, function(out)
+				if out.stderr ~= "" then
+					vim.notify(out.stderr, vim.log.levels.ERROR)
+				else
+					vim.notify("Graph exported", vim.log.levels.INFO)
+				end
+			end)
 		end,
 		desc = "Auto dot command on save",
 	})
@@ -32,6 +38,7 @@ function M.export(command)
 			else
 				vim.notify("Graph exported", vim.log.levels.INFO)
 			end
+			vim.ui.open(command[#command])
 		end)
 	end
 end
@@ -46,17 +53,24 @@ end
 -- 	})
 -- end
 
----Verify existence of exported file
+---Verify existence of exported file and open it if exists
 ---@param file string File's path to Verify
 ---@return boolean
-function M.open_file(file)
-	if vim.fn.filereadable(file) == 1 then
-		vim.notify_once("Graph exported!", vim.log.levels.ERROR)
-		return true
-	else
-		vim.notify_once("No files detected!", vim.log.levels.ERROR)
-		return false
-	end
-end
+-- function M.open_file(file)
+-- 	if
+-- 		vim.wait(5000, function()
+-- 			if vim.fn.filereadable(file) == 1 then
+-- 				vim.notify_once("Graph exported!", vim.log.levels.ERROR)
+-- 				return true
+-- 			else
+-- 				vim.notify_once("No files detected!", vim.log.levels.ERROR)
+-- 				return false
+-- 			end
+-- 		end, 2500)
+-- 	then
+-- 		vim.ui.open(file)
+-- 	end
+-- 	return true
+-- end
 
 return M
