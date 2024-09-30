@@ -19,6 +19,7 @@ function M.user_commands()
 	-- Create commands ONLY for dot files
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "dot",
+		-- group = utils.group,
 		callback = function()
 			buf_user_command(0, "GraphExport", function(opts)
 				local args = opts.fargs[1] or M.config.format
@@ -35,7 +36,7 @@ function M.user_commands()
 			buf_user_command(0, "GraphPreview", function()
 				commands.graph_preview(M.config.preview)
 			end, {
-				desc = "Graphviz preview with autocommand",
+				desc = "Graphviz preview on save",
 			})
 		end,
 	})
