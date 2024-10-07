@@ -1,6 +1,6 @@
 # Graphviz.nvim
 
-A very simple wrapper for [graphviz](https://graphviz.org/). I hope this my first plugin helps someone.
+A very simple wrapper for [graphviz](https://graphviz.org/). I hope my first plugin helps someone.
 
 > [!NOTE]
 > This plugin require [graphviz](https://graphviz.org/)
@@ -17,30 +17,30 @@ A very simple wrapper for [graphviz](https://graphviz.org/). I hope this my firs
 }
 ```
 
-**default config**
+- **default config**
 
 ```lua
 require("graphviz").setup({
-    format = "pdf", --default format for GraphExport
-    preview = "pdf" --default format for GraphPreview
+ format = "pdf", --default format for GraphExport
+ preview = "pdf", --default format for GraphPreview
 })
 ```
 
 ## How to use
 
-The plugin have two commands to play, but only works with **dot** and **gv** files.
+> [!NOTE]
+> Unfortunately, this plugin only works with `dot` command.
 
-- `GraphExport` can take 1 argument for format, but can take the default value of setup.
+The plugin have two commands to play. These commands are only visible on **dot** and **gv** files.
+`Graphviz.nvim` use `vim.notify` for error notifications on export.
+
+- `GraphExport` can accept 1 argument for the format, but if no argument is provided, it will use the default **setup** value.
 
 ```vim
 :GraphExport format
 ```
-`GraphExport` notify users if something goes wrong on first time.
 
-This command only convert the actual file to preferred format.
-
-> [!WARNING]
-> Unfortunately, this command ONLY notify user on first export.
+`GraphExport` only export the actual file to preferred format.
 
 - `GraphPreview` don't take arguments, but you can change the format in setup
 
@@ -48,5 +48,4 @@ This command only convert the actual file to preferred format.
 :GraphPreview
 ```
 
-`GrapPreview` exports too, but it's a command that works similar but is automatic. This command exports on save!. So you don't need to run the command `GraphExport` every time you want to see results.
-
+`GraphPreview` also exports, but it works automatically. It exports whenever you save, so you don’t have to run the `GraphExport` command every time you want to see the results.
